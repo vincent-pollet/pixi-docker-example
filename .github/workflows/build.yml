@@ -21,7 +21,6 @@ jobs:
         uses: docker/build-push-action@v7
         with:
           platforms: linux/amd64,linux/arm64
-          context: ./5-distroless-debug
           push: false
           tags: multiplatform:latest
       # - name: Build with buildctl
