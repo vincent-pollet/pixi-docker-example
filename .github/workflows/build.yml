@@ -1,4 +1,4 @@
-name: Build container with buildctl
+name: Build with buildctl
 
 on:
   push:
@@ -6,20 +6,20 @@ on:
 
 jobs:
   build:
-    runs-on: ubuntu-latest # GitHub public runner
+    runs-on: ubuntu-latest
     steps:
       - name: Checkout
         uses: actions/checkout@v4
 
       - name: Set up Docker Buildx
         uses: docker/setup-buildx-action@v3
-        # This installs buildctl and configures BuildKit
+        # This installs buildctl and adds it to PATH
 
       - name: Build with buildctl
         run: |
           buildctl build \
             --frontend dockerfile.v0 \
             --local context=5-distroless-debug/ \
-            --platform linux/amd64,linux/arm64 \
             --local dockerfile=5-distroless-debug \
+            --platform linux/amd64,linux/arm64 \
             --output type=docker,dest=my-image:latest
