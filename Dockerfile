@@ -2,7 +2,7 @@ FROM ghcr.io/prefix-dev/pixi:0.23.0-bookworm AS build
 
 WORKDIR /app
 COPY . .
-RUN pixi install --locked -e prod
+RUN pixi install --frozen -e prod
 
 FROM gcr.io/distroless/base-debian12:debug AS production
 WORKDIR /app
